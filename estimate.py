@@ -1,5 +1,5 @@
 def getThetas():
-    with open("thetas.txt", "r") as file:
+    with open("utils/thetas.txt", "r") as file:
         content = file.read()
         thetas = [float(x) for x in content.split(',')[:2]]
         return thetas
