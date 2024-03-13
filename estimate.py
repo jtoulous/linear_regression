@@ -1,14 +1,16 @@
-def getThetas():
-    with open("utils/thetas.txt", "r") as file:
-        content = file.read()
-        thetas = [float(x) for x in content.split(',')[:2]]
-        return thetas
+from normalizer import Normalizer, normalizeDataset
+from utils import getThetas
 
 if __name__ == "__main__":
     try:
+        userInput = float(input("mileage: "))
+        #checkInput(userInput)
+
+        normalizer, dataset = normalizeDataset(userInput=userInput)
         thetas = getThetas()
-        mileage = float(input("mileage: "))
-        print(f"the estimated price for your vehicule is {thetas[0] + (thetas[1] * mileage)}")
+
+        estimatedPrice = thetas[0] + (thetas[1] * normalizer.normalizeKm(userInput))
+        print(f"the estimated price for your vehicule is {normalizer.denormalizePrice(estimatedPrice)}")
 
     except Exception as error:
         print(f"{error}")
