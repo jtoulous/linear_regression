@@ -40,10 +40,4 @@ def normalizeDataset(userInput=None):
     for i in range(len(kmData)):
         dataset.append([normalizer.normalizeKm(kmData[i]), normalizer.normalizePrice(priceData[i])])
 
-    #with open('normalized_data.csv', 'w', newline='') as csvFile:
-    #    writer = csv.writer(csvFile)
-    #    writer.writerow(['km', 'price'])
-    #    for data in dataset:
-    #        writer.writerow(data)
-
     return normalizer, dataset
