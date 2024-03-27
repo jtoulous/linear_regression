@@ -1,13 +1,15 @@
 import sys
+import os
 import subprocess
 
-from normalizer import Normalizer, normalizeDataset
-from utils import saveThetas
+from utils.normalizer import normalizeDataset
+from utils.utils import saveThetas
 
 if __name__ == '__main__':
     try:
         if len(sys.argv) > 1 and sys.argv[1] == "reset":
             saveThetas(0,0)
+            os.remove("data/graph.png")
             exit()
 
         learningRate = 0.3

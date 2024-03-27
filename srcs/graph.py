@@ -1,8 +1,9 @@
+from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 
-from normalizer import Normalizer, normalizeDataset
-from utils import getThetas
+from utils.normalizer import normalizeDataset
+from utils.utils import getThetas
 
 def getData():
     dataset = []
@@ -56,8 +57,10 @@ if __name__ == "__main__":
         ax.xaxis.set_major_formatter('{x:.1f}')
         ax.yaxis.set_major_formatter('{x:.1f}')
 
-        plt.show()
-
+        #plt.show()
+        plt.savefig("data/graph.png")
+        img = Image.open('data/graph.png')
+        img.show()
 
     except Exception as error:
         print(error)
