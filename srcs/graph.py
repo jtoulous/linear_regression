@@ -1,3 +1,4 @@
+from PIL import Image
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -72,8 +73,10 @@ if __name__ == "__main__":
         ax.xaxis.set_major_formatter('{x:.1f}')
         ax.yaxis.set_major_formatter('{x:.1f}')
 
-        plt.show()
-
+        #plt.show()
+        plt.savefig("data/graph.png")
+        img = Image.open('data/graph.png')
+        img.show()
 
     except Exception as error:
         print(error)

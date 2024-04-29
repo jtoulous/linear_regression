@@ -27,4 +27,4 @@ if __name__ == "__main__":
             print(f"the estimated price for your vehicule is {estimatedPrice}$")
 
     except Exception as error:
-        print(f"{error}")
+        printError(f"{error}")
