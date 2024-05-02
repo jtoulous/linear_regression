@@ -3,34 +3,23 @@ import pandas as pd
 import numpy as np
 from statistics import mean, stdev
 
-from utils import getThetas, normalizeDataset, normalize, denormalize
+from utils import getThetas
 
 def getData():
     dataFrame = pd.read_csv('data/data.csv')
-    normData = {'means': {}, 'stds': {}}
-    thetas = []
+    thetas = getThetas()
     km_list = []
     price_list = []
-    features = list(dataFrame.columns)
-
-    with open('data/thetas.txt', 'r') as file:
-        for line in file:
-            for value in line.split(','):
-                thetas.append(float(value))
-
-    for feature in features:
-        normData['means'][feature] = mean(dataFrame[feature])
-        normData['stds'][feature] = stdev(dataFrame[feature])
 
     for feature in dataFrame:
         for i in range(len(dataFrame)):
-            value = normalize(dataFrame[feature][i], normData['means'][feature], normData['stds'][feature])
+            value = dataFrame[feature][i]
             if feature == 'km':
                 km_list.append(value)
             elif feature == 'price':
                 price_list.append(value)
 
-    return km_list, price_list, thetas, normData
+    return km_list, price_list, thetas
     
 
 
@@ -47,13 +36,13 @@ def getPredictionLine(x_limMin, x_limMax, thetas):
 
 if __name__ == "__main__":
     try:
-        x_limMin = -3
-        x_limMax = 3
-        y_limMin = -3
-        y_limMax = 3
+        x_limMin = 0
+        x_limMax = 255000
+        y_limMin = 0
+        y_limMax = 13000
 
-        x_km, y_price, thetas, normData = getData()
-        x_prediction, y_prediction = getPredictionLine(-10, 10, thetas) 
+        x_km, y_price, thetas = getData()
+        x_prediction, y_prediction = getPredictionLine(-10, 250000, thetas) 
 
         fig, ax = plt.subplots()
 

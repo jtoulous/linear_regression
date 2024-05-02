@@ -1,28 +1,18 @@
 import os
 import csv
+import pandas as pd
 
-def normalize(value, mean, std):
-    return (value - mean) / std
-
-def denormalize(value, mean, std):
-    return (value * std) + mean
-
-def normalizeDataset():
+def getData():
     dataframe = pd.read_csv('data/data.csv')
-    normData = {'means': {}, 'stds': {}}
     dataset = []
     features = list(dataframe.columns)
-
-    for feature in features:
-        normData['means'][feature] = mean(dataframe[feature])
-        normData['stds'][feature] = stdev(dataframe[feature])
 
     for i in range(len(dataframe)):
         new_data = {}
         for feature in features:
-            new_data[feature] = normalize(dataframe[feature][i], normData['means'][feature], normData['stds'][feature])
+            new_data[feature] = dataframe[feature][i]
         dataset.append(new_data)
-    return dataset, normData
+    return dataset
 
 
 def saveThetas(theta0, theta1):
